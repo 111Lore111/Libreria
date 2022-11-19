@@ -35,9 +35,6 @@ public abstract class Usuario {
         setPeriodoPrestamo(periodoPrestamo);
         
     }
-    
-    
-  
 
     public String getNombre() {
         return nombre;

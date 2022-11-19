@@ -10,4 +10,19 @@ package libreria.domain;
  */
 public class Estudiante {
     
+    private String carreraEnCurso;
+
+    public Estudiante(String carreraEnCurso) {
+        setCarreraEnCurso(carreraEnCurso);
+    }
+
+    public String getCarreraEnCurso() {
+        return carreraEnCurso;
+    }
+
+    public void setCarreraEnCurso(String carreraEnCurso) {
+        this.carreraEnCurso = carreraEnCurso;
+    }
+    
+    
 }

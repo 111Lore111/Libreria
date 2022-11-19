@@ -7,8 +7,10 @@
 
 
 
-package libreria.domain;
+package libreria;
 
+import libreria.Libro;
+import libreria.Usuario;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 

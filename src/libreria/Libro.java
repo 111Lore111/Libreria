@@ -14,22 +14,18 @@ public class Libro {
     private String titulo;
     private String autor;
     public int cantidadBiblioteca;
-    public int cantidadDispPrestamo;
+    public int cantidadDisPrestamo;
     private String imagen;
 
-    public Libro(int ISBN, String titulo, String autor, int cantidadBiblioteca, int cantidadDispPrestamo, String imagen) {
+    public Libro(int ISBN, String titulo, String autor, int cantidadBiblioteca, int cantidadDisPrestamo, String imagen) {
         setISBN(ISBN);
-        this.titulo = titulo;
-        this.autor = autor;
-        this.cantidadBiblioteca = cantidadBiblioteca;
-        this.cantidadDispPrestamo = cantidadDispPrestamo;
-        this.imagen = imagen;
+        setTitulo(titulo);
+        setAutor(autor);
+        setCantidadBiblioteca(cantidadBiblioteca);
+        setCantidadDisPrestamo(cantidadDisPrestamo);
+        setImagen(imagen);
     }
     
-    public Libro (int ISBN){ 
-        setISBN(ISBN);
-    }
-
     public int getISBN() {
         return ISBN;
     }
@@ -63,11 +59,11 @@ public class Libro {
     }
 
     public int getCantidadDispPrestamo() {
-        return cantidadDispPrestamo;
+        return cantidadDisPrestamo;
     }
 
-    public void setCantidadDispPrestamo(int cantidadDispPrestamo) {
-        this.cantidadDispPrestamo = cantidadDispPrestamo;
+    public void setCantidadDisPrestamo(int cantidadDisPrestamo) {
+        this.cantidadDisPrestamo = cantidadDisPrestamo;
     }
 
     public String getImagen() {

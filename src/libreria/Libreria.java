@@ -25,31 +25,40 @@ public class Libreria {
         final String archivoLibros = "listaLibros.csv";
         ArrayList<Libro> listaLibro = cargaLibros(archivoLibros);
         
-        Usuario a = new Docente("hola","hola","Juanito","1-9",'P',"a","ass",1);
-        System.out.println(a.getGenero());
+//        Usuario a = new Docente("hola","hola","Juanito","1-9",'P',"a","ass",1);
+//        System.out.println(a.getGenero());
        
     }
     
-    public static ArrayList<Libro> cargaLibros(String nombreArchivo) throws FileNotFoundException {
-        File archivo = new File(nombreArchivo);
+    public static ArrayList<Libro> cargaLibros(String archivoLibros) throws FileNotFoundException {
         
+        File archivo = new File(archivoLibros);
+//        ArrayList<Libro> listaLibro = new ArrayList<Libro>();       
         if (!archivo.exists()) {
             throw new IllegalArgumentException("Archivo no existente.");
         }
         
         Scanner leer = new Scanner(archivo);
+        leer.nextLine();
         ArrayList<Libro> listaLibro = new ArrayList<Libro>();
         String columnas = leer.nextLine();
         
         while (leer.hasNextLine()) {
             String linea = leer.nextLine();
             String cortado[] = linea.split(";");
+            String acum = "";
             int ISBN = Integer.parseInt(cortado[0]);
-
-            Libro obj = new Libro(ISBN);
-            listaLibro.add(obj);
+            String titulo = cortado[1];
+            String autor = cortado[2];
+            int cantidadBiblioteca = Integer.parseInt(cortado[3]);
+            int cantidadDisPrestamo = Integer.parseInt(cortado[4]);
+            String imagen = cortado[5];
+            
+            for(int i=0; i < cortado.length; i++){
+                acum+=cortado[i]+" ";
+            }
+            System.out.println("Prueba " + acum);
         }
-        leer.close();
         return listaLibro;
     }
     

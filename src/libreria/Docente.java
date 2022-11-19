@@ -15,7 +15,7 @@ public class Docente extends Usuario {
     private String profesion;
     private String grado;
 
-    public Docente(String profesion, String grado, String nombre, String run, char genero, String prestamo, String carrera, int periodoPrestamo) throws Exception {
+    public Docente(String profesion, String grado, String nombre, String run, char genero, String prestamo, String carrera, int periodoPrestamo) {
         super(nombre,run,genero,prestamo, carrera, periodoPrestamo);
         setProfesion(profesion);
         setGrado(grado);

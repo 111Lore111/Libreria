@@ -6,6 +6,7 @@ package libreria;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Arrays;
 
 
 /**
@@ -25,7 +26,7 @@ public abstract class Usuario {
     public Usuario(){
     }
 
-    public Usuario(String nombre, String run, char genero, String prestamo, String carrera, int periodoPrestamo) throws Exception {
+    public Usuario(String nombre, String run, char genero, String prestamo, String carrera, int periodoPrestamo) {
         setNombre(nombre);
         setRun(run);
         setGenero(genero);
@@ -52,13 +53,14 @@ public abstract class Usuario {
 
     public void setRun(String run) {
         
-         if(!(ValidarRut(this.run))){
+        if(!(ValidarRut(run))){
              try {
                  throw new Exception("rut invalido");
              } catch (Exception ex) {
                  Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
              }
         }
+       
         this.run = run;
     }
 
@@ -67,9 +69,9 @@ public abstract class Usuario {
     }
 
     public void setGenero(char genero){
-           if(!(ValidarGenero(this.genero))){
+           if(!(ValidarGenero(genero))){
                try {
-                   throw new Exception( "/n valor invalido favor ingresar 'M' o 'F'");
+                   throw new Exception( "valor invalido favor ingresar 'M' o 'F'");
                } catch (Exception ex) {
                    Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
                }
@@ -116,11 +118,35 @@ public abstract class Usuario {
 
     
     public boolean ValidarRut (String run){
-        return true;
+        
+        boolean validacion = false;
+       
+            run = run.toUpperCase();
+            run = run.replace(".", "");
+            run = run.replace("-","");
+            int runAux = Integer.parseInt(run.substring(0, run.length()- 1));
+            char dv = run.charAt(run.length() - 1);
+            
+            int m=0, s=1;
+            
+            for(;runAux != 0; runAux /= 10)
+            {
+                s = (s + runAux % 10 *(9 - m++ % 6))%11;
+                
+        }
+            if (dv == (char)(s != 0 ? s + 47 : 75)){
+                validacion = true;
+            }
+  
+        return validacion;
     }
+
+
     
     public boolean ValidarGenero(char genero){
-        return true;
+        
+       return(genero =='M' || genero == 'm' || genero  =='F' || genero == 'f');
+        
     }
       
 }

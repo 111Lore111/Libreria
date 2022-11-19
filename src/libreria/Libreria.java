@@ -20,7 +20,12 @@ public class Libreria {
     public static void main(String[] args) {
         // TODO code application logic here
         
-  
+       Usuario a = new Docente("hola","hola","Juanito","1-9",'A',"a","ass",1);
+      
+        
+        
+        
+       
     }
     
 }

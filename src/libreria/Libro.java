@@ -10,14 +10,14 @@ package libreria;
  */
 public class Libro {
     
-    private String ISBN;
+    private int ISBN;
     private String titulo;
     private String autor;
     public int cantidadBiblioteca;
     public int cantidadDispPrestamo;
     private String imagen;
 
-    public Libro(String ISBN, String titulo, String autor, int cantidadBiblioteca, int cantidadDispPrestamo, String imagen) {
+    public Libro(int ISBN, String titulo, String autor, int cantidadBiblioteca, int cantidadDispPrestamo, String imagen) {
         setISBN(ISBN);
         this.titulo = titulo;
         this.autor = autor;
@@ -26,17 +26,15 @@ public class Libro {
         this.imagen = imagen;
     }
     
-    public Libro (){ 
-        
-        
-    
+    public Libro (int ISBN){ 
+        setISBN(ISBN);
     }
 
-    public String getISBN() {
+    public int getISBN() {
         return ISBN;
     }
 
-    public void setISBN(String ISBN) {
+    public void setISBN(int ISBN) {
         this.ISBN = ISBN;
     }
 

@@ -22,7 +22,7 @@ public class Menu {
                 System.out.println("4. Eliminar de Usuario");
                 System.out.println("5. Listar Libros");
                 System.out.println("6. Crear Libro");
-                System.out.println("7. Eliminar de Pedido");
+                System.out.println("7. Eliminar de Libro");
                 System.out.println("8. Crear prestamo");
                 System.out.println("9. Crear devolucion");
                 System.out.println("0. Salir");

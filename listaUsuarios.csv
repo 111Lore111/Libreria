@@ -1,10 +1,10 @@
 tipo;run;nombre;genero;prestamo;carrera;profesion;grado
-null;25240157-1;Elsa Pato;F;0;Medicina
-null;6213204-3;Marcia Ana;F;0;;Ingeniero
-null;5783659-8;Elvis Tek;M;0;;Ingeniero
-null;32804663-6;Aquiles Bailo;M;0;Periodismo
-null;39856998-9;Armando Mocha;M;0;Teatro
-null;11434209-2;Luz Roja;F;0;Ingeniero;Doctor
-null;27757687-2;Elmer Curio;M;0;Periodismo
-null;28680451-9;Mario Neta;M;0;Ingeniero;Doctor
-null;167645674;Giovani;M;0;Ingenieria
+Docente;6213204-3;Marcia Ana;F;0;;Ingeniero
+Docente;5783659-8;Elvis Tek;M;0;;Ingeniero
+Estudiante;32804663-6;Aquiles Bailo;M;0;Periodismo
+Estudiante;39856998-9;Armando Mocha;M;0;Teatro
+Docente;11434209-2;Luz Roja;F;0;Ingeniero;Doctor
+Estudiante;27757687-2;Elmer Curio;M;0;Periodismo
+Docente;28680451-9;Mario Neta;M;0;Ingeniero;Doctor
+Estudiante;167645674;Giovani;M;0;Ingenieria
+Docente;16764567-4;GiovaniDiaz;M;0;Ingeniero;Magister

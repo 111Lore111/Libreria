@@ -267,7 +267,7 @@ public abstract class Usuario {
     // ----------- METODOS PARA SOLICITAR DATOS AL USUARIO ------------
 
     private String getTipo() {
-        return null;
+        return tipo;
     }
 
     // Solicita el rut del usuario a agregar

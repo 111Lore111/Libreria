@@ -5,8 +5,6 @@
 
  */
 
-
-
 package libreria;
 
 import libreria.Libro;
@@ -19,13 +17,13 @@ import java.util.GregorianCalendar;
  * @author Lorraine
  */
 public class Prestamo {
-    
+
     private GregorianCalendar fecha;
     private Usuario usuario;
     private Libro libro;
-    //private Devolucion devolucion;
-    
-       /**
+    // private Devolucion devolucion;
+
+    /**
      * @return the usuario
      */
     public Usuario getUsuario() {
@@ -68,18 +66,17 @@ public class Prestamo {
     }
 
     /**
-     
-    
-    public Devolucion getDevolucion() {
-        return devolucion;
-    }
-
-
-    public void setDevolucion(Devolucion devolucion) {
-        this.devolucion = devolucion;
-    }
-   
+     * 
+     * 
+     * public Devolucion getDevolucion() {
+     * return devolucion;
+     * }
+     * 
+     * 
+     * public void setDevolucion(Devolucion devolucion) {
+     * this.devolucion = devolucion;
+     * }
+     * 
      */
-    
-    
+
 }

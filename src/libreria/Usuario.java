@@ -264,6 +264,10 @@ public abstract class Usuario {
         escribir.close();
     }
 
+    // TODO: Crear metodo para buscar si usuario existe por rut
+    // Pasa
+    // Usuario buscaUsuarioPorRut = Prestamo.buscarUsuario(String rut);
+
     // ----------- METODOS PARA SOLICITAR DATOS AL USUARIO ------------
 
     private String getTipo() {

@@ -81,6 +81,7 @@ public class Prestamo {
         return null;
     }
 
+    // Pasas el rut y te retorna el usuario en caso de no encontrarlo retorna null
     public static Usuario buscarUsuario(String run, ArrayList<Usuario> usuarios) {
 
         for (int i = 0; i < usuarios.size(); i++) {

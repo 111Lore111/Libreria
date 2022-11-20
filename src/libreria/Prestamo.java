@@ -5,8 +5,6 @@
 
  */
 
-
-
 package libreria;
 
 import libreria.Libro;
@@ -19,19 +17,18 @@ import java.util.GregorianCalendar;
  * @author Lorraine
  */
 public class Prestamo {
-    
+
     private GregorianCalendar fecha;
     private Usuario usuario;
     private Libro libro;
-    //private Devolucion devolucion;
-    
-   
+    // private Devolucion devolucion;
+
     public Prestamo(GregorianCalendar fecha, Usuario usuario, Libro libro) {
         setFecha(fecha);
         setUsuario(usuario);
         setLibro(libro);
     }
-    
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -57,35 +54,35 @@ public class Prestamo {
     }
 
     /**
-     
-    
-    public Devolucion getDevolucion() {
-        return devolucion;
-    }
-
-
-    public void setDevolucion(Devolucion devolucion) {
-        this.devolucion = devolucion;
-    }
-   
+     * 
+     * 
+     * public Devolucion getDevolucion() {
+     * return devolucion;
+     * }
+     * 
+     * 
+     * public void setDevolucion(Devolucion devolucion) {
+     * this.devolucion = devolucion;
+     * }
+     * 
      */
-    
+
     public static Libro buscarLibro(int ISBN, ArrayList<Libro> libros) {
 
-           for (int i = 0; i < libros.size(); i++) {
-               Libro libro = libros.get(i);
+        for (int i = 0; i < libros.size(); i++) {
+            Libro libro = libros.get(i);
 
-               if (libro.getISBN() == ISBN) {
-                   System.out.println("Libro encontrado");
-                   return libro;
-               }
-           }
-           System.out.println("Libro no encontrado");
-           return null;
+            if (libro.getISBN() == ISBN) {
+                System.out.println("Libro encontrado");
+                return libro;
+            }
+        }
+        System.out.println("Libro no encontrado");
+        return null;
     }
-    
+
     public static Usuario buscarUsuario(String run, ArrayList<Usuario> usuarios) {
-        
+
         for (int i = 0; i < usuarios.size(); i++) {
             Usuario usuario = usuarios.get(i);
             if (usuario.getRun().equals(run)) {

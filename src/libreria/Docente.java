@@ -1,24 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package libreria;
 
-import libreria.Usuario;
-
-/**
- *
- * @author Lorraine
- */
 public class Docente extends Usuario {
-    
+
     private String profesion;
     private String grado;
 
-    public Docente(String profesion, String grado, String nombre, String run, char genero, String prestamo, String carrera, int periodoPrestamo) {
-        super(nombre,run,genero,prestamo, carrera, periodoPrestamo);
-        setProfesion(profesion);
-        setGrado(grado);
+    // Se declara el constructor con los atributos de la clase Usuario (Superclase)
+    public Docente(String tipo, String nombre, String run, char genero, String prestamo, String profesion,
+            String grado) {
+        super(tipo, nombre, run, genero, prestamo);
+        this.profesion = profesion;
+        this.grado = grado;
     }
 
     public String getProfesion() {
@@ -36,6 +28,5 @@ public class Docente extends Usuario {
     public void setGrado(String grado) {
         this.grado = grado;
     }
-    
-    
+
 }

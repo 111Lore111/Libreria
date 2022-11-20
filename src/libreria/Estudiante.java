@@ -1,33 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package libreria;
 
-import libreria.Usuario;
+public class Estudiante extends Usuario {
+    private String carrera;
 
-/**
- *
- * @author Lorraine
- */
-public class Estudiante extends Usuario{
-    
-    private String carreraEnCurso;
-
-    public Estudiante(String nombre, String run, char genero, String prestamo, String carrera, int periodoPrestamo, String carreraEnCurso) {
-      super(nombre,run,genero,prestamo,carrera,periodoPrestamo);
-      setCarreraEnCurso(carreraEnCurso);
-       
-        
+    // Se declara el constructor con los atributos de la clase Usuario (Superclase)
+    public Estudiante(String tipo, String nombre, String run, char genero, String prestamo, String carrera) {
+        super(tipo, nombre, run, genero, prestamo);
+        this.carrera = carrera;
     }
 
-    public String getCarreraEnCurso() {
-        return carreraEnCurso;
+    public String getCarrera() {
+        return carrera;
     }
 
-    public void setCarreraEnCurso(String carreraEnCurso) {
-        this.carreraEnCurso = carreraEnCurso;
+    public void setCarrera(String carrera) {
+        this.carrera = carrera;
+
     }
-    
-    
+
 }

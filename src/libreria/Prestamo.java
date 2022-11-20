@@ -9,8 +9,11 @@ package libreria;
 
 import libreria.Libro;
 import libreria.Usuario;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
 
 /**
  *
@@ -81,17 +84,75 @@ public class Prestamo {
         return null;
     }
 
-    // Pasas el rut y te retorna el usuario en caso de no encontrarlo retorna null
-    public static Usuario buscarUsuario(String run, ArrayList<Usuario> usuarios) {
+    // public static void crearPrestamo() {
+    // // ArrayList<Usuario> usuarios = Usuario.listarUsuarios();
+    // // ArrayList<Libro> libros = Libro.listarLibros();
 
-        for (int i = 0; i < usuarios.size(); i++) {
-            Usuario usuario = usuarios.get(i);
-            if (usuario.getRun().equals(run)) {
-                System.out.println("Run encontrado");
-                return usuario;
+    // // Scanner lectura = new Scanner(System.in);
+
+    // // System.out.println("Ingrese el run del usuario: ");
+    // // String run = lectura.nextLine();
+
+    // // Usuario usuario = buscarUsuario(run, usuarios);
+
+    // // if (usuario != null) {
+    // // System.out.println("Ingrese el ISBN del libro: ");
+    // // int ISBN = lectura.nextInt();
+
+    // // Libro libro = buscarLibro(ISBN, libros);
+
+    // // if (libro != null) {
+    // // System.out.println("Ingrese el año: ");
+    // // int año = lectura.nextInt();
+    // // System.out.println("Ingrese el mes: ");
+    // // int mes = lectura.nextInt();
+    // // System.out.println("Ingrese el dia: ");
+    // // int dia = lectura.nextInt();
+
+    // // GregorianCalendar fecha = new GregorianCalendar(año, mes, dia);
+
+    // // Prestamo prestamo = new Prestamo(fecha, usuario, libro);
+
+    // // System.out.println("Prestamo creado con exito");
+    // // } else {
+    // // System.out.println("No se pudo crear el prestamo");
+    // // }
+    // // } else {
+    // // System.out.println("No se pudo crear el prestamo");
+    // // }
+    // }
+
+    public static void crearPrestamo() throws FileNotFoundException {
+        Scanner lectura = new Scanner(System.in);
+        // Se cargan los libros y los usuarios
+        ArrayList<Libro> libros = Libro.cargaLibros("listaLibros.csv");
+        ArrayList<Usuario> usuarios = Usuario.cargaUsuarios("listaUsuarios.csv");
+        // Se solicita el run de un usuario invocando el metodo solicitarRun
+        String run = Usuario.solicitarRut();
+        // Se busca el usuario en la lista de usuarios
+        Usuario usuario = Usuario.buscarUsuario(run);
+        // Se solicita el ISBN de un libro invocando el metodo solicitarISBN
+        // int ISBN = Libro.solicitarISBN();
+    }
+
+    // buscarLibro
+    public static Libro buscarLibro(int ISBN) throws FileNotFoundException {
+        // Clase Scanner para leer datos desde el teclado
+        Scanner lectura = new Scanner(System.in);
+        // Se carga el arraylist de libros
+        ArrayList<Libro> listaLibros = Libro.cargaLibros("listaLibros.csv");
+
+        // Se busca el libro en el arraylist
+        for (int i = 0; i < listaLibros.size(); i++) {
+            Libro libro = listaLibros.get(i);
+
+            if (libro.getISBN() == ISBN) {
+                System.out.println("Libro encontrado");
+                return libro;
             }
         }
-        System.out.println("Run no encontrado");
+        System.out.println("Libro no encontrado");
         return null;
+
     }
 }

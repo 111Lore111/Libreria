@@ -23,7 +23,8 @@ public abstract class Usuario {
     private int periodoPrestamo;
     
     
-    public Usuario(){
+    public Usuario(String run){
+        setRun(run);
     }
 
     public Usuario(String nombre, String run, char genero, String prestamo, String carrera, int periodoPrestamo) {

@@ -25,44 +25,33 @@ public class Prestamo {
     private Libro libro;
     //private Devolucion devolucion;
     
-       /**
-     * @return the usuario
-     */
+   
+    public Prestamo(GregorianCalendar fecha, Usuario usuario, Libro libro) {
+        setFecha(fecha);
+        setUsuario(usuario);
+        setLibro(libro);
+    }
+    
     public Usuario getUsuario() {
         return usuario;
     }
 
-    /**
-     * @param usuario the usuario to set
-     */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    /**
-     * @return the libro
-     */
     public Libro getLibro() {
         return libro;
     }
 
-    /**
-     * @param libro the libro to set
-     */
     public void setLibro(Libro libro) {
         this.libro = libro;
     }
 
-    /**
-     * @return the fecha
-     */
     public GregorianCalendar getFecha() {
         return fecha;
     }
 
-    /**
-     * @param fecha the fecha to set
-     */
     public void setFecha(GregorianCalendar fecha) {
         this.fecha = fecha;
     }
@@ -81,5 +70,30 @@ public class Prestamo {
    
      */
     
+    public static Libro buscarLibro(int ISBN, ArrayList<Libro> libros) {
+
+           for (int i = 0; i < libros.size(); i++) {
+               Libro libro = libros.get(i);
+
+               if (libro.getISBN() == ISBN) {
+                   System.out.println("Libro encontrado");
+                   return libro;
+               }
+           }
+           System.out.println("Libro no encontrado");
+           return null;
+    }
     
+    public static Usuario buscarUsuario(String run, ArrayList<Usuario> usuarios) {
+        
+        for (int i = 0; i < usuarios.size(); i++) {
+            Usuario usuario = usuarios.get(i);
+            if (usuario.getRun().equals(run)) {
+                System.out.println("Run encontrado");
+                return usuario;
+            }
+        }
+        System.out.println("Run no encontrado");
+        return null;
+    }
 }

@@ -4,6 +4,8 @@
  */
 package libreria;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Lorraine
@@ -24,6 +26,10 @@ public class Libro {
         setCantidadBiblioteca(cantidadBiblioteca);
         setCantidadDisPrestamo(cantidadDisPrestamo);
         setImagen(imagen);
+    }
+    
+    public Libro(int ISBN){
+        setISBN(ISBN);
     }
     
     public int getISBN() {
@@ -73,9 +79,5 @@ public class Libro {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
-    
-    
-    
     
 }

@@ -1,22 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package libreria;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
-/**
- *
- * @author Lorraine
- */
 public abstract class Usuario {
 
     private String nombre;
@@ -24,9 +13,6 @@ public abstract class Usuario {
     private char genero;
     private String prestamo;
     private String tipo;
-    // private int periodoPrestamo; // TODO: No pertece a la clase Usuario es de la
-    // clase Prestamo
-    // private String carrera; // TODO: Carrera es un atributo de Estudiante, no de
 
     public Usuario(String tipo, String nombre, String run, char genero, String prestamo) {
         this.tipo = tipo;
@@ -35,6 +21,15 @@ public abstract class Usuario {
         this.genero = genero;
         this.prestamo = prestamo;
         // this.periodoPrestamo = periodoPrestamo;
+    }
+
+    // ---- GETTERS Y SETTERS ----
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getNombre() {
@@ -50,16 +45,6 @@ public abstract class Usuario {
     }
 
     public void setRun(String run) {
-        // TODO: Ese try catch no es necesario, el método setRun() no lanza ninguna
-        // excepción
-        if (!(ValidarRut(run))) {
-            try {
-                throw new Exception("rut invalido");
-            } catch (Exception ex) {
-                Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
         this.run = run;
     }
 
@@ -87,100 +72,9 @@ public abstract class Usuario {
         this.prestamo = prestamo;
     }
 
-    // public int getPeriodoPrestamo() {
-    // return periodoPrestamo;
-    // }
+    // ---- METODOS CRUD ----
 
-    // public void setPeriodoPrestamo(int periodoPrestamo) {
-    // this.periodoPrestamo = periodoPrestamo;
-    // }
-
-    /*
-     * 
-     * El RUN no puede repetirse.
-     * 1.2.2. Debe validar formato y dígito verificador del RUN.
-     * 1.2.3. Debe validar que el género del usuario sea M o F.
-     * 1.2.4. Préstamo corresponde a si el usuario tiene en su poder o no un libro,
-     * siendo cero no, e ISBN que sí.
-     * 1.3. Eliminar usuario, debe validar que exista.
-     * 1.4. Existen usuarios que son Docentes o Estudiantes. A los docentes
-     * adicionalmente se les registra la profesión con sus grados
-     * (magíster y/o doctor); y a los estudiantes la carrera que está estudiando.
-     */
-
-    public boolean ValidarRut(String run) {
-
-        boolean validacion = false;
-
-        run = run.toUpperCase();
-        run = run.replace(".", "");
-        run = run.replace("-", "");
-        int runAux = Integer.parseInt(run.substring(0, run.length() - 1));
-        char dv = run.charAt(run.length() - 1);
-
-        int m = 0, s = 1;
-
-        for (; runAux != 0; runAux /= 10) {
-            s = (s + runAux % 10 * (9 - m++ % 6)) % 11;
-
-        }
-        if (dv == (char) (s != 0 ? s + 47 : 75)) {
-            validacion = true;
-        }
-
-        return validacion;
-    }
-
-    public boolean ValidarGenero(char genero) {
-        // * 1.2.3. Debe validar que el género del usuario sea M o F.
-        // Retorna true si el genero es valido sino retorna false
-        return genero == 'M' || genero == 'F';
-    }
-
-    public static ArrayList<Usuario> cargaUsuarios(String archivoUsuarios) throws FileNotFoundException {
-
-        File archivo = new File(archivoUsuarios);
-        if (!archivo.exists()) {
-            throw new IllegalArgumentException("Archivo no existente.");
-        }
-
-        try (Scanner leer = new Scanner(archivo)) {
-            leer.nextLine();
-            ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
-            String columnas = leer.nextLine();
-
-            while (leer.hasNextLine()) {
-                String linea = leer.nextLine();
-                String cortado[] = linea.split(";");
-                String acum = "";
-                String tipo = cortado[0];
-                String run = cortado[1];
-                String nombre = cortado[2];
-                char genero = cortado[3].charAt(0);
-                String prestamo = cortado[4];
-
-                for (int i = 0; i < cortado.length; i++) {
-                    acum += cortado[i] + " ";
-                }
-                // La estructura del archivo de usuarios es la siguiente:
-                // tipo,run;nombre,genero;prestamo;carrera;profesion;grado
-
-                if (tipo.equals("Estudiante")) {
-                    String carrera = cortado[5];
-                    listaUsuario.add(new Estudiante(tipo, nombre, run, genero, prestamo, carrera));
-                } else if (tipo.equals("Docente")) {
-                    String profesion = cortado[5];
-                    String grado = cortado[6];
-                    listaUsuario.add(new Docente(tipo, nombre, run, genero, prestamo, profesion, grado));
-                }
-                System.out.println(acum);
-            }
-
-            return listaUsuario;
-        }
-    }
-
-    public static void agregarUsuario() throws FileNotFoundException {
+    public static void crearUsuario() throws FileNotFoundException {
         // Se crea una lista con los usuarios leidos desde cargaUsuarios
         ArrayList<Usuario> listaUsuarios = cargaUsuarios("listaUsuarios.csv");
 
@@ -227,15 +121,168 @@ public abstract class Usuario {
             listaUsuarios.add(estudiante);
         }
 
-        // Se imprime el nuevo usuario agregado
-        System.out.println("Nuevo usuario agregado: " + listaUsuarios.get(listaUsuarios.size() - 1));
+        System.out.println("Nuevo usuario agregado!!");
 
         // Se escribe el archivo con los usuarios actualizados
-        escribirArchivo(listaUsuarios);
+        guardarUsuariosEnArchivo(listaUsuarios);
 
     }
 
-    public static void escribirArchivo(ArrayList<Usuario> listaUsuarios) throws FileNotFoundException {
+    public static void eliminarUsuario() throws FileNotFoundException {
+        // Se crea una lista con los usuarios leidos desde cargaUsuarios
+        ArrayList<Usuario> listaUsuarios = cargaUsuarios("listaUsuarios.csv");
+
+        // Se solicita el rut del usuario a eliminar
+        String run = solicitarRut();
+        // Se recorre la lista para ver si el usuario existe
+        for (Usuario usuario : listaUsuarios) {
+            // Si el usuario existe se elimina de la lista
+            if (usuario.getRun().equals(run)) {
+                listaUsuarios.remove(usuario);
+                System.out.println("Usuario eliminado");
+                break;
+            }
+        }
+
+        // Se escribe el archivo con los usuarios actualizados
+        guardarUsuariosEnArchivo(listaUsuarios);
+    }
+
+    public static void editarUsuario() throws FileNotFoundException {
+        // Se crea una lista con los usuarios leidos desde cargaUsuarios
+        ArrayList<Usuario> listaUsuarios = cargaUsuarios("listaUsuarios.csv");
+
+        // Se solicita el rut del usuario a modificar
+        String run = solicitarRut();
+        // Se recorre la lista para ver si el usuario existe
+        for (Usuario usuario : listaUsuarios) {
+            // Si el usuario existe se modifica
+            if (usuario.getRun().equals(run)) {
+                // Se solicita el nombre del usuario
+                String nombre = solicitarNombre();
+                // Se solicita el genero del usuario
+                char genero = solicitarGenero();
+                // Se solicita el tipo de usuario (Docente o Estudiante)
+                String tipo = solicitarTipoUsuario();
+                // Si es un Docente se solicitan los atributos correspondientes
+                if (tipo.equals("Docente")) {
+                    String profesion = solicitarProfesion();
+                    String grado = solicitarGrado();
+
+                    // Se mantiene el prestamo del usuario
+                    String prestamo = usuario.getPrestamo();
+                    Docente docente = new Docente(tipo, nombre, run, genero, prestamo, profesion, grado);
+
+                    // Se agrega el docente a la lista de usuarios
+                    listaUsuarios.set(listaUsuarios.indexOf(usuario), docente);
+                }
+                // Si es un Estudiante se solicitan los atributos correspondientes
+                else if (tipo.equals("Estudiante")) {
+                    String carrera = solicitarCarrera();
+
+                    // Se mantiene el prestamo del usuario
+                    String prestamo = usuario.getPrestamo();
+                    Estudiante estudiante = new Estudiante(tipo, nombre, run, genero, prestamo, carrera);
+
+                    // Se agrega el estudiante a la lista de usuarios
+                    listaUsuarios.set(listaUsuarios.indexOf(usuario), estudiante);
+                }
+
+                // Se imprime el usuario modificado
+                System.out.println("Usuario modificado correctamente");
+                break;
+            }
+        }
+
+        // Se escribe el archivo con los usuarios actualizados
+        guardarUsuariosEnArchivo(listaUsuarios);
+    }
+
+    public static void listarUsuarios() throws FileNotFoundException {
+        // Se crea una lista con los usuarios leidos desde cargaUsuarios
+        ArrayList<Usuario> listUsuarios = cargaUsuarios("listaUsuarios.csv");
+
+        System.out.println(
+                "---------------------------------------- LISTA DE USUARIOS ----------------------------------------");
+        // Se imprimen los encabezados de la tabla
+        System.out.println("Tipo\t\tNombre\t\tRut\t\tGenero\t\tPrestamo\tProf/Carrera\tGrado");
+        // Se recorre la lista de usuarios y se imprimen en terminal
+        for (Usuario usuario : listUsuarios) {
+            String strUsuario = usuario.getTipo() + " \t"
+                    + usuario.getNombre() + " \t"
+                    + usuario.getRun() + " \t"
+                    + usuario.getGenero() + " \t\t"
+                    + usuario.getPrestamo();
+
+            if (usuario.getTipo().equals("Docente")) {
+                strUsuario += " \t\t" + ((Docente) usuario).getProfesion() + " \t"
+                        + ((Docente) usuario).getGrado();
+            } else if (usuario.getTipo().equals("Estudiante")) {
+                strUsuario += " \t\t" + ((Estudiante) usuario).getCarrera();
+            }
+            System.out.println(strUsuario);
+        }
+        System.out.println(
+                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    }
+
+    public static Usuario buscarUsuario(String run, ArrayList<Usuario> listaUsuarios) {
+        // Se recorre la lista de usuarios para ver si el usuario existe
+        for (Usuario usuario : listaUsuarios) {
+            // Si el usuario existe se retorna
+            if (usuario.getRun().equals(run)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+    // ---- METODOS AUXILIARES MANEJO DE ARCHIVOS ----
+
+    public static ArrayList<Usuario> cargaUsuarios(String archivoUsuarios) throws FileNotFoundException {
+
+        File archivo = new File(archivoUsuarios);
+        if (!archivo.exists()) {
+            throw new IllegalArgumentException("Archivo no existente.");
+        }
+
+        try (Scanner leer = new Scanner(archivo)) {
+            leer.nextLine();
+            ArrayList<Usuario> listaUsuario = new ArrayList<Usuario>();
+            String columnas = leer.nextLine();
+
+            while (leer.hasNextLine()) {
+                String linea = leer.nextLine();
+                String cortado[] = linea.split(";");
+                String acum = "";
+                String tipo = cortado[0];
+                String run = cortado[1];
+                String nombre = cortado[2];
+                char genero = cortado[3].charAt(0);
+                String prestamo = cortado[4];
+
+                for (int i = 0; i < cortado.length; i++) {
+                    acum += cortado[i] + " ";
+                }
+                // La estructura del archivo de usuarios es la siguiente:
+                // tipo,run;nombre,genero;prestamo;carrera;profesion;grado
+
+                if (tipo.equals("Estudiante")) {
+                    String carrera = cortado[5];
+                    listaUsuario.add(new Estudiante(tipo, nombre, run, genero, prestamo, carrera));
+                } else if (tipo.equals("Docente")) {
+                    String profesion = cortado[5];
+                    String grado = cortado[6];
+                    listaUsuario.add(new Docente(tipo, nombre, run, genero, prestamo, profesion, grado));
+                }
+                // System.out.println(acum);
+            }
+
+            return listaUsuario;
+        }
+    }
+
+    public static void guardarUsuariosEnArchivo(ArrayList<Usuario> listaUsuarios) throws FileNotFoundException {
         // Se crea un archivo con el nombre listaUsuarios.csv
         File archivo = new File("listaUsuarios.csv");
         // Se crea un PrintWriter para escribir en el archivo
@@ -264,15 +311,9 @@ public abstract class Usuario {
         escribir.close();
     }
 
-    // TODO: Crear metodo para buscar si usuario existe por rut
-    // Pasa
-    // Usuario buscaUsuarioPorRut = Prestamo.buscarUsuario(String rut);
-
-    // ----------- METODOS PARA SOLICITAR DATOS AL USUARIO ------------
-
-    private String getTipo() {
-        return tipo;
-    }
+    // ****************************************************************
+    // ---- METODOS PARA SOLICITAR DATOS AL USUARIO CON VALIDADORES ---
+    // ****************************************************************
 
     // Solicita el rut del usuario a agregar
     public static String solicitarRut() {
@@ -280,10 +321,10 @@ public abstract class Usuario {
         System.out.println("Ingrese el rut del usuario: ");
         String rut = sc.nextLine();
         while (!validarRut(rut)) {
-            System.out.println("El rut ingresado no es valido, ingrese uno nuevo. El formato es 12345678-9");
+            System.out.println("El rut ingresado no es valido, ingrese uno nuevo   :");
             rut = sc.nextLine();
         }
-        System.out.println("Rut en formato válido");
+        // System.out.println("Rut en formato válido");
         return rut;
 
     }
@@ -389,15 +430,5 @@ public abstract class Usuario {
         }
         return carrera;
     }
-
-    // // Se crea metodo para imprimir los datos de una lista de usuarios
-    // public static void imprimirListaUsuarios(ArrayList<Usuario> listaUsuarios) {
-    // for (Usuario usuario : listaUsuarios) {
-    // // Se pasa a string
-    // String datosUsuario = usuario.toString();
-    // // Se imprime
-    // System.out.println(datosUsuario);
-    // }
-    // }
 
 }

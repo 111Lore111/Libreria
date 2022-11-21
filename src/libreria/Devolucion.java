@@ -1,21 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package libreria;
 
 import java.util.GregorianCalendar;
 
-/**
- *
- * @author Lorraine
- */
 public class Devolucion {
-    
-    private GregorianCalendar fechaDevolucion;
 
-    public Devolucion(GregorianCalendar fechaDevolucion) {
+    private GregorianCalendar fechaDevolucion;
+    private int multa;
+
+    public Devolucion(GregorianCalendar fechaDevolucion, int multa) {
         setFechaDevolucion(fechaDevolucion);
+        setMulta(multa);
     }
 
     public GregorianCalendar getFechaDevolucion() {
@@ -24,5 +18,13 @@ public class Devolucion {
 
     public void setFechaDevolucion(GregorianCalendar fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
+    }
+
+    public int getMulta() {
+        return multa;
+    }
+
+    public void setMulta(int multa) {
+        this.multa = multa;
     }
 }

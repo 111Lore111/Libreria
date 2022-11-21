@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class Menu {
 
+    public static Object lectura;
+
     public static void main(String[] args) throws FileNotFoundException {
 
         try (Scanner lectura = new Scanner(System.in)) {
@@ -37,14 +39,7 @@ public class Menu {
                         case 1:
                             System.out.println("");
                             System.out.println("");
-                            System.out.println("---------- LISTA DE USUARIOS ----------");
-                            Usuario.cargaUsuarios("listaUsuarios.csv");
-                            // Se carga la lista de usuarios y se imprime en pantalla utilizando el método
-                            // imprimirListaUsuarios
-                            // ArrayList<Usuario> listaUsuarios =
-                            // Usuario.cargaUsuarios("listaUsuarios.csv");
-                            // Usuario.imprimirListaUsuarios(listaUsuarios);
-                            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                            Usuario.listarUsuarios();
                             System.out.println("");
                             System.out.println("");
                             break;
@@ -52,33 +47,40 @@ public class Menu {
                             System.out.println("");
                             System.out.println("");
                             System.out.println("---------- CREAR USUARIO ----------");
-                            // Se utiliza agregarUsuario de clase Usuario
-                            Usuario.agregarUsuario();
+                            Usuario.crearUsuario();
+                            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                            System.out.println("");
+                            System.out.println("");
                             break;
                         case 3:
+                            System.out.println("");
+                            System.out.println("");
                             System.out.println("---------- EDITAR USUARIO ----------");
-
+                            Usuario.editarUsuario();
                             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                             System.out.println("");
                             System.out.println("");
                             break;
                         case 4:
-                            System.out.println("---------- ELIMINAR USUARIO ----------");
 
+                            System.out.println("");
+                            System.out.println("");
+                            System.out.println("---------- ELIMINAR USUARIO ----------");
+                            Usuario.eliminarUsuario();
                             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                             System.out.println("");
                             System.out.println("");
                             break;
                         case 5:
                             System.out.println("---------- LISTAR LIBROS ----------");
-
+                            // Libro.listarLibros();
                             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                             System.out.println("");
                             System.out.println("");
                             break;
                         case 6:
                             System.out.println("---------- CREAR LIBRO ----------");
-
+                            Libro.crearLibro();
                             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                             System.out.println("");
                             System.out.println("");

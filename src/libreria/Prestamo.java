@@ -119,7 +119,7 @@ public class Prestamo {
                     libro.setCantidadDispPrestamo(libro.getCantidadDispPrestamo() - 1);
 
                     // Se guarda un archivo prestamos.csv con los datos del prestamo
-                    // guardarPrestamo(prestamo); // TODO: Crear metodo guardarPrestamo
+                    guardarPrestamoEnArchivo(prestamo);
 
                     // Se muestra mensaje de prestamo creado
                     System.out.println("Prestamo creado con exito");

@@ -39,9 +39,7 @@ public class Menu {
                         case 1:
                             System.out.println("");
                             System.out.println("");
-
                             Usuario.listarUsuarios();
-
                             System.out.println("");
                             System.out.println("");
                             break;
@@ -75,14 +73,14 @@ public class Menu {
                             break;
                         case 5:
                             System.out.println("---------- LISTAR LIBROS ----------");
-
+                            // Libro.listarLibros();
                             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                             System.out.println("");
                             System.out.println("");
                             break;
                         case 6:
                             System.out.println("---------- CREAR LIBRO ----------");
-
+                            Libro.crearLibro();
                             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                             System.out.println("");
                             System.out.println("");

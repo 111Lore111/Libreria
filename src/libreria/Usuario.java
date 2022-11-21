@@ -124,7 +124,7 @@ public abstract class Usuario {
         System.out.println("Nuevo usuario agregado!!");
 
         // Se escribe el archivo con los usuarios actualizados
-        escribirArchivo(listaUsuarios);
+        guardarUsuariosEnArchivo(listaUsuarios);
 
     }
 
@@ -145,7 +145,7 @@ public abstract class Usuario {
         }
 
         // Se escribe el archivo con los usuarios actualizados
-        escribirArchivo(listaUsuarios);
+        guardarUsuariosEnArchivo(listaUsuarios);
     }
 
     public static void editarUsuario() throws FileNotFoundException {
@@ -195,7 +195,7 @@ public abstract class Usuario {
         }
 
         // Se escribe el archivo con los usuarios actualizados
-        escribirArchivo(listaUsuarios);
+        guardarUsuariosEnArchivo(listaUsuarios);
     }
 
     public static void listarUsuarios() throws FileNotFoundException {
@@ -226,21 +226,15 @@ public abstract class Usuario {
                 "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     }
 
-    public static Usuario buscarUsuario(String run) throws FileNotFoundException {
-        // Se carga el arraylist de usuarios
-        ArrayList<Usuario> listaUsuarios = cargaUsuarios("listaUsuarios.csv");
-        // Se recorre la lista de usuarios buscando el run si no se encuentra se
-        // solicita otro hasta que se encuentre uno que exista
-        while (true) {
-            for (Usuario usuario : listaUsuarios) {
-                if (usuario.getRun().equals(run)) {
-                    return usuario;
-                }
+    public static Usuario buscarUsuario(String run, ArrayList<Usuario> listaUsuarios) {
+        // Se recorre la lista de usuarios para ver si el usuario existe
+        for (Usuario usuario : listaUsuarios) {
+            // Si el usuario existe se retorna
+            if (usuario.getRun().equals(run)) {
+                return usuario;
             }
-            System.out.println("El usuario no existe, ingrese otro rut");
-            run = solicitarRut();
         }
-
+        return null;
     }
 
     // ---- METODOS AUXILIARES MANEJO DE ARCHIVOS ----
@@ -288,7 +282,7 @@ public abstract class Usuario {
         }
     }
 
-    public static void escribirArchivo(ArrayList<Usuario> listaUsuarios) throws FileNotFoundException {
+    public static void guardarUsuariosEnArchivo(ArrayList<Usuario> listaUsuarios) throws FileNotFoundException {
         // Se crea un archivo con el nombre listaUsuarios.csv
         File archivo = new File("listaUsuarios.csv");
         // Se crea un PrintWriter para escribir en el archivo

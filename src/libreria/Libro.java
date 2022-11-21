@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package libreria;
 
 import java.util.ArrayList;
@@ -12,32 +8,32 @@ import java.util.Scanner;
 
 public class Libro {
 
-    private int ISBN;
+    private String ISBN;
     private String titulo;
     private String autor;
     public int cantidadBiblioteca;
-    public int cantidadDisPrestamo;
+    public int cantidadDispPrestamo;
     private String imagen;
 
-    public Libro(int ISBN, String titulo, String autor, int cantidadBiblioteca, int cantidadDisPrestamo,
+    public Libro(String ISBN, String titulo, String autor, int cantidadBiblioteca, int cantidadDispPrestamo,
             String imagen) {
         setISBN(ISBN);
         setTitulo(titulo);
         setAutor(autor);
         setCantidadBiblioteca(cantidadBiblioteca);
-        setCantidadDisPrestamo(cantidadDisPrestamo);
+        setCantidadDispPrestamo(cantidadDispPrestamo);
         setImagen(imagen);
     }
 
-    public Libro(int ISBN) {
+    public Libro(String ISBN) {
         setISBN(ISBN);
     }
 
-    public int getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
-    public void setISBN(int ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 
@@ -66,11 +62,11 @@ public class Libro {
     }
 
     public int getCantidadDispPrestamo() {
-        return cantidadDisPrestamo;
+        return cantidadDispPrestamo;
     }
 
-    public void setCantidadDisPrestamo(int cantidadDisPrestamo) {
-        this.cantidadDisPrestamo = cantidadDisPrestamo;
+    public void setCantidadDispPrestamo(int cantidadDispPrestamo) {
+        this.cantidadDispPrestamo = cantidadDispPrestamo;
     }
 
     public String getImagen() {
@@ -96,11 +92,56 @@ public class Libro {
         while (sc.hasNextLine()) {
             String linea = sc.nextLine();
             String[] datos = linea.split(";");
-            Libro libro = new Libro(Integer.parseInt(datos[0]), datos[1], datos[2],
-                    Integer.parseInt(datos[3]), Integer.parseInt(datos[4]), datos[5]);
+            Libro libro = new Libro(datos[0], datos[1], datos[2], Integer.parseInt(datos[3]),
+                    Integer.parseInt(datos[4]), datos[5]);
             libros.add(libro);
         }
         return libros;
+    }
+
+    // Metodo solicitarISBN
+    public static String solicitarISBN() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduzca el ISBN del libro a prestar: ");
+        String ISBN = sc.nextLine();
+        return ISBN;
+    }
+
+    // Metodo buscarLibro(ISBN);
+    public static Libro buscarLibro(String ISBN, ArrayList<Libro> libros) {
+        for (Libro libro : libros) {
+            if (libro.getISBN().equals(ISBN)) {
+                return libro;
+            }
+        }
+        return null;
+    }
+
+    // Metodo para crear un libro
+    public static Libro crearLibro() {
+        // Se cargan los libros actuales con el metodo cargaLibros
+        ArrayList<Libro> libros = new ArrayList<>();
+        try {
+            libros = cargaLibros("listaLibros.csv");
+        } catch (FileNotFoundException e) {
+            System.out.println("No se ha encontrado el archivo de libros.");
+        }
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduzca el ISBN del libro: ");
+        String ISBN = sc.nextLine();
+        System.out.println("Introduzca el titulo del libro: ");
+        String titulo = sc.nextLine();
+        System.out.println("Introduzca el autor del libro: ");
+        String autor = sc.nextLine();
+        System.out.println("Introduzca la cantidad de libros en la biblioteca: ");
+        int cantidadBiblioteca = sc.nextInt();
+        System.out.println("Introduzca la cantidad de libros disponibles para prestamo: ");
+        int cantidadDispPrestamo = sc.nextInt();
+        System.out.println("Introduzca la ruta de la imagen del libro: ");
+        String imagen = sc.nextLine();
+        Libro libro = new Libro(ISBN, titulo, autor, cantidadBiblioteca, cantidadDispPrestamo, imagen);
+        return libro;
     }
 
 }
